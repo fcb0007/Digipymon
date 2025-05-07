@@ -12,9 +12,9 @@ class Inventario:
 
     def usar_objeto(self, objeto):
         if objeto in self.objetos:
-            cantidadPrevia = 0
-            cantidadPrevia = self.objetos.get(self.objeto)
-            self.objetos[objeto] = cantidadPrevia - 1
+            cantidad_previa = 0
+            cantidad_previa = self.objetos.get(self.objeto)
+            self.objetos[objeto] = cantidad_previa - 1
             
             if self.objetos.get(self.objeto) == 0:
                 del self.objetos[objeto]
