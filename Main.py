@@ -33,7 +33,7 @@ def main ():
         probabilidad_captura = 100 - (digipymon_encontrado.nivel * 10)
         print("Has encontrado un...")
         print(digipymon_encontrado)
-        print("La probabilidad de capturar al " + digipymon_encontrado.nombre + " es de " + str(probabilidad_captura))
+        print("La probabilidad de capturar al " + digipymon_encontrado.nombre + " es de un " + str(probabilidad_captura) + "%")
         
         
         
