@@ -12,7 +12,7 @@ def main ():
         ataque = random.randint(1, 10)
         tipo = random.choice(tipos)
         nivel = random.randint(1, 3)
-        print(nombre)  
-    generar_digipymon_aleatorio()   
+        digipymon1 = Digipymon(nombre, vida, ataque, tipo, nivel)
+        return digipymon1
+    print(generar_digipymon_aleatorio())   
 main()
-    
