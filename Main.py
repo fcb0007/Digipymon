@@ -14,5 +14,15 @@ def main ():
         nivel = random.randint(1, 3)
         digipymon1 = Digipymon(nombre, vida, ataque, tipo, nivel)
         return digipymon1
-    print(generar_digipymon_aleatorio())   
+    print(generar_digipymon_aleatorio())
+
+    def menu():
+        print("1. Buscar Digipymon") 
+        print("2. Luchar contra un entrenador")
+        print("3. Ir a la teinda")
+        print("4. Usar objeto")
+        print("5. Consultar inventario")
+        print("6. Consultar Digipymons")
+        print("7. Salir")
+
 main()
