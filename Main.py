@@ -25,4 +25,9 @@ def main ():
         print("6. Consultar Digipymons")
         print("7. Salir")
 
+    bucle = True
+    while bucle:
+        menu()
+        respuesta = input()
+    bucle = False
 main()
