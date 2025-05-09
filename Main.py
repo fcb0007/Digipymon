@@ -41,6 +41,7 @@ def main ():
         menu()
         respuesta = input()
     if respuesta == "1":
+        buscar_digipymon()
     elif respuesta == "7":
         bucle = False
 
