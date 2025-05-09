@@ -42,8 +42,9 @@ def main ():
         
         respuesta = menu()
         if respuesta == "1":
-    elif respuesta == "7":
-        bucle = False
+            
+        elif respuesta == "7":
+            bucle = False
 
     
 main()
