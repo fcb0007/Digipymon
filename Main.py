@@ -27,7 +27,7 @@ def main ():
         print("6. Consultar Digipymons")
         print("7. Salir")
         respuesta = 0
-        respuesta = int(input(""))
+        respuesta = input("")
         return respuesta
     
     def buscar_digipymon():
@@ -39,9 +39,9 @@ def main ():
     
     bucle = True
     while bucle:
-        menu()
-        respuesta = input()
-    if respuesta == "1":
+        
+        respuesta = menu()
+        if respuesta == "1":
     elif respuesta == "7":
         bucle = False
 
