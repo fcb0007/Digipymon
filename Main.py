@@ -15,29 +15,37 @@ def main ():
         nivel = random.randint(1, 3)
         digipymon1 = Digipymon(nombre, vida, ataque, tipo, nivel)
         return digipymon1
-    
+    print(generar_digipymon_aleatorio())
+
     def menu():
-        print("1. Buscar Digipymon")
+        print("Elige una opcion")
+        print("1. Buscar Digipymon") 
         print("2. Luchar contra un entrenador")
-        print("3. Ir a la tienda")
-        print("4. Usar objetos")
+        print("3. Ir a la teinda")
+        print("4. Usar objeto")
         print("5. Consultar inventario")
-        print("6. Consultar digipymons")
+        print("6. Consultar Digipymons")
         print("7. Salir")
-        opcion = 0
-        opcion = int(input(""))
-        return opcion
+        respuesta = 0
+        respuesta = int(input(""))
+        return respuesta
     
     def buscar_digipymon():
         digipymon_encontrado = generar_digipymon_aleatorio()
-        probabilidad_captura = 100 - (digipymon_encontrado.nivel * 10)
+        probabilidad_captura = 100 - (digipymon_encontrado.nivel *10)
         print("Has encontrado un...")
         print(digipymon_encontrado)
-        print("La probabilidad de capturar al " + digipymon_encontrado.nombre + " es de un " + str(probabilidad_captura) + "%")
-        
-        
-        
-    buscar_digipymon()     
+        print("La probabilidad de captura al " + digipymon_encontrado.nombre + " en de un " + str(probabilidad_captura) + "%")
+    
+    bucle = True
+    while bucle:
+        menu()
+        respuesta = input()
+    if respuesta == "1":
+    elif respuesta == "7":
+        bucle = False
+
+    
 main()
 
     
