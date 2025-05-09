@@ -2,6 +2,7 @@ from Digipymon import Digipymon
 from Enemigo import Enemigo
 from Inventario import Inventario
 from ListaNombres import ListaNombres
+from Jugador import Jugador
 import random
 def main ():
     lista_nombres1 = ListaNombres() 
@@ -35,7 +36,33 @@ def main ():
         print("Has encontrado un...")
         print(digipymon_encontrado)
         print("La probabilidad de captura al " + digipymon_encontrado.nombre + " en de un " + str(probabilidad_captura) + "%")
-    
+
+    def digishop(jugador, inventario):
+        print("|-----Catalogo de Digishop-----|")
+        print("A. Digipyballs --> 5 digicoins c/u")
+        print("B. Pocion curativa (Restaura 10p de salud) --> 3 Digiicoins c/u")
+        print("C. Anabolizantes (Aumenta el ataque en 5p) --> 4 Digicoins c/u")
+        print("¿Qué desea comprar?")
+        opcion_compra = input()
+        if opcion_compra == "A":
+            jugador.digipoints >= 5
+            print("Has comprado una digipyball")
+            jugador.digipoints = jugador.digipoints - 5
+            inventario.añadir_objeto("Digipyball", 1)
+        elif opcion_compra == "B":
+            jugador.digipoints >= 3
+            print("Has comprado una pocion")
+            jugador.digipoints = jugador.digipoints - 3
+            inventario.añadir_objeto("Pocion", 1)
+        elif opcion_compra == "C":
+            jugador.digipoints >= 4
+            print("Has comprado un anabolizante")
+            jugador.digipoints = jugador.digipoints - 5
+            inventario.añadir_objeto("Digipyball", 1)
+        else:
+            print("No tienes fondos suficientes o no es la opcion correcta")
+            
+
     bucle = True
     while bucle:
         menu()
