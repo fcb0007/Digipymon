@@ -1,8 +1,8 @@
-from Digipymon import Digipymon
-from Enemigo import Enemigo
-from Inventario import Inventario
-from ListaNombres import ListaNombres
-from Jugador import Jugador
+from digipymon import Digipymon
+from enemigo import Enemigo
+from inventario import Inventario
+from lista_nombres import ListaNombres
+from jugador import Jugador
 import random
 
 
@@ -42,8 +42,13 @@ def buscar_digipymon(jugador, inventario):
     print("2. No")
     opcion = input()
     if opcion == "1":
-        if "digipyballs" in inventario.objetos and jugador.cantidad_dig:
+        if "digipyballs" in inventario.objetos and jugador.cantidad_digipymons < 6:
             jugador.digipyballs = jugador.digipyballs - 1
+
+        elif "digipyballs" not in inventario.objetos:
+            print("No te quedan digipyballs")
+        elif jugador.cantidad_digipymons == 6:
+            print("Ya tienes 6 digipymons, no puedes capturar más")
 
     elif opcion == "2":
         print("Has huido")
@@ -53,7 +58,7 @@ def buscar_digipymon(jugador, inventario):
 
     
 def main(): 
-    bucle = True
+   """ bucle = True
     while bucle:
      jugador1 = Jugador("Pepe")
 
@@ -62,7 +67,7 @@ def main():
     if respuesta == "1":
 
     elif respuesta == "7":
-        bucle = False
+        bucle = False"""
 
     
 main()
