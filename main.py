@@ -34,6 +34,7 @@ def menu():
 def buscar_digipymon(jugador, inventario):
     digipymon_encontrado = generar_digipymon_aleatorio()
     probabilidad_captura = 100 - (digipymon_encontrado.nivel *10)
+    
     print("Has encontrado un...")
     print(digipymon_encontrado)
     print("La probabilidad de captura al " + digipymon_encontrado.nombre + " es de un " + str(probabilidad_captura) + "%")
@@ -43,7 +44,13 @@ def buscar_digipymon(jugador, inventario):
     opcion = input()
     if opcion == "1":
         if "digipyballs" in inventario.objetos and jugador.cantidad_digipymons < 6:
-            jugador.digipyballs = jugador.digipyballs - 1
+            inventario.usar_objeto("digypiballs")
+
+            if random.randint(1, 100) < probabilidad_captura:
+                print("Has capturado un nuevo digipymon!!")
+                jugador.listadigypimon.append(digipymon_encontrado)
+            else:
+                print("El digipymon " + digipymon_encontrado.nombre + " ha escapado!")    
 
         elif "digipyballs" not in inventario.objetos:
             print("No te quedan digipyballs")
@@ -53,7 +60,7 @@ def buscar_digipymon(jugador, inventario):
     elif opcion == "2":
         print("Has huido")
     else:
-        print("Introudce una opción correcta")            
+        print("Introduce una opción correcta")            
 
 
     
