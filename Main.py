@@ -27,7 +27,7 @@ def main ():
         print("6. Consultar Digipymons")
         print("7. Salir")
         respuesta = 0
-        respuesta = int(input(""))
+        respuesta = (input(""))
         return respuesta
     
     def buscar_digipymon():
@@ -62,6 +62,16 @@ def main ():
         else:
             print("No tienes fondos suficientes o no es la opcion correcta")
             
+    def usar_item(inventario):
+        print inventario()
+        print("¿Que objeto quieres usar?")
+        objeto = (input(""))
+        if objeto == "digipyball":
+            print("Este objeto no puede ser utilizado en tu digipymon")
+        elif objeto == "pocion":
+            print()
+        print("¿Sobre que digipymon quieres utilizar tu objeto?")
+
 
     bucle = True
     while bucle:
@@ -69,6 +79,8 @@ def main ():
         respuesta = input()
     if respuesta == "1":
         buscar_digipymon()
+    elif respuesta =="3":
+        digishop()
     elif respuesta == "7":
         bucle = False
 
