@@ -13,10 +13,10 @@ class Inventario:
     def usar_objeto(self, objeto):
         if objeto in self.objetos:
             cantidad_previa = 0
-            cantidad_previa = self.objetos.get(self.objeto)
+            cantidad_previa = self.objetos.get(objeto)
             self.objetos[objeto] = cantidad_previa - 1
             
-            if self.objetos.get(self.objeto) == 0:
+            if self.objetos.get(objeto) == 0:
                 del self.objetos[objeto]
         else:
             print("No dispones de ese objeto")

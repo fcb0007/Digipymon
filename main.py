@@ -34,35 +34,48 @@ def menu():
 def buscar_digipymon(jugador, inventario):
     digipymon_encontrado = generar_digipymon_aleatorio()
     probabilidad_captura = 100 - (digipymon_encontrado.nivel *10)
+    salirBucle = True
+    while(salirBucle):
+        print("Has encontrado un...")
+        print(digipymon_encontrado)
+        print("La probabilidad de captura al " + digipymon_encontrado.nombre + " es de un " + str(probabilidad_captura) + "%")
+        print("¿Deseas capturar al digipymon?")
+        print("1. Sí")
+        print("2. No")
+        opcion = input()
+        if opcion == "1":
+            if "Digipyball" in inventario.objetos and jugador.cantidad_digipymon < 6:
+                inventario.usar_objeto("Digipyball")
+
+                if random.randint(1, 100) < probabilidad_captura:
+                    print("Has capturado un nuevo digipymon!!" + digipymon_encontrado.nombre)
+                    jugador.lista_digipymon.append(digipymon_encontrado)                    
+                    salirBucle = False
+
+                else:
+                    print("El digipymon " + digipymon_encontrado.nombre + " ha escapado!")
+                    salirBucle = False    
+
+            elif "Digipyball" not in inventario.objetos:
+                print("No te quedan digipyballs")
+                print("El digipymon " + digipymon_encontrado.nombre + " ha escapado!")
+                salirBucle = False
+
+            elif jugador.cantidad_digipymon == 6:
+                print("Ya tienes 6 digipymons, no puedes capturar más")
+                print("El digipymon " + digipymon_encontrado.nombre + " ha escapado!")
+                salirBucle = False
+
+        elif opcion == "2":
+            print("Has huido")
+            salirBucle = False
+        else:
+            print("Introduce una opción correcta")            
+
+def combate():
+    lista_nombres1 = ListaNombres()
+    enemigo1 = Enemigo(lista_nombres1.obtener_nombre_entrenador())
     
-    print("Has encontrado un...")
-    print(digipymon_encontrado)
-    print("La probabilidad de captura al " + digipymon_encontrado.nombre + " es de un " + str(probabilidad_captura) + "%")
-    print("¿Deseas capturar al digipymon?")
-    print("1. Sí")
-    print("2. No")
-    opcion = input()
-    if opcion == "1":
-        if "digipyballs" in inventario.objetos and jugador.cantidad_digipymons < 6:
-            inventario.usar_objeto("digypiballs")
-
-            if random.randint(1, 100) < probabilidad_captura:
-                print("Has capturado un nuevo digipymon!!")
-                jugador.listadigypimon.append(digipymon_encontrado)
-            else:
-                print("El digipymon " + digipymon_encontrado.nombre + " ha escapado!")    
-
-        elif "digipyballs" not in inventario.objetos:
-            print("No te quedan digipyballs")
-        elif jugador.cantidad_digipymons == 6:
-            print("Ya tienes 6 digipymons, no puedes capturar más")
-
-    elif opcion == "2":
-        print("Has huido")
-    else:
-        print("Introduce una opción correcta")            
-
-
     
 def main(): 
    """ bucle = True
@@ -75,8 +88,10 @@ def main():
 
     elif respuesta == "7":
         bucle = False"""
-
-    
+   jugador1 = Jugador("Pepe")
+   inventario1 = Inventario()
+   inventario1.añadir_objeto("Digipyball", 2)   
+   buscar_digipymon(jugador1, inventario1)
 main()
 
     
