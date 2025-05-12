@@ -4,9 +4,9 @@ from Inventario import Inventario
 from ListaNombres import ListaNombres
 from Jugador import Jugador
 import random
-def main ():
-    lista_nombres1 = ListaNombres() 
+
     def generar_digipymon_aleatorio():
+        lista_nombres1 = ListaNombres()
         tipos = ["fuego", "agua", "planta"]
         nombre = lista_nombres1.obtener_nombre_digipymon()
         vida = random.randint(10, 20)
@@ -63,7 +63,7 @@ def main ():
             print("No tienes fondos suficientes o no es la opcion correcta")
             
     def usar_item(inventario):
-        print inventario()
+        print(inventario()) 
         print("¿Que objeto quieres usar?")
         objeto = (input(""))
         if objeto == "digipyball":
@@ -72,17 +72,15 @@ def main ():
             print()
         print("¿Sobre que digipymon quieres utilizar tu objeto?")
 
-
-    bucle = True
-    while bucle:
-        menu()
-        respuesta = input()
-    if respuesta == "1":
-        buscar_digipymon()
-    elif respuesta =="3":
-        digishop()
-    elif respuesta == "7":
-        bucle = False
-
-    
-main()
+    def main():
+        bucle = True
+        while bucle:
+            menu()
+            respuesta = input()
+        if respuesta == "1":
+            buscar_digipymon()
+        elif respuesta =="3":
+            digishop()
+        elif respuesta == "7":
+            bucle = False
+    main()
