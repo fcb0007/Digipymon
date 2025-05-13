@@ -5,6 +5,7 @@ from lista_nombres import ListaNombres
 from jugador import Jugador
 import random
 
+
 def generar_digipymon_aleatorio():
     lista_nombres1 = ListaNombres()
     tipos = ["fuego", "agua", "planta"]
@@ -15,7 +16,6 @@ def generar_digipymon_aleatorio():
     nivel = random.randint(1, 3)
     digipymon1 = Digipymon(nombre, vida, ataque, tipo, nivel)
     return digipymon1
-print(generar_digipymon_aleatorio())
 
 def menu():
     print("Elige una opcion")
@@ -27,7 +27,7 @@ def menu():
     print("6. Consultar Digipymons")
     print("7. Salir")
     respuesta = 0
-    respuesta = (input(""))
+    respuesta = input("")
     return respuesta
 
 def buscar_digipymon():
