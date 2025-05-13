@@ -72,13 +72,45 @@ def buscar_digipymon(jugador, inventario):
         else:
             print("Introduce una opción correcta")            
 
-def combate():
-    lista_nombres1 = ListaNombres()
-    enemigo1 = Enemigo(lista_nombres1.obtener_nombre_entrenador())
-    
+def combate(lista_nombres, enemigo, jugador):
+    bucleCombate = True
+    for i in range(0, jugador.cantidad_digipymon ):
+        enemigo.añadir_digipymon(lista_nombres.obtener_nombre_digipymon)
+
+    while(bucleCombate):
+        print("Te has encontrado con " + enemigo.nombre + " y te reta a un combate!")
+        print("¿Quieres luchar?")
+        print("1. Sí")
+        print("2. No")
+        opcion = input()
+        if (opcion == "1"):
+            victorias = 0    
+            derrotas = 0
+            for i in range (jugador.cantidad_digipymons):
+                digipymonJugador = jugador.lista_digypimons[i].nombre
+                digipymonEnemigo = enemigo.lista_digypimons[i].nombre
+                ataqueEnemigo = enemigo.lista_digipymons[i].ataque
+                ataqueJugador = jugador.lista_digipymons[i].ataque
+
+                print("Tu " + digipymonJugador)
+                print("Se enfrenta a...")
+                print(digipymonEnemigo)
+                
+                if (ataqueJugador > ataqueEnemigo):
+                    perdidaVida = ataqueJugador - ataqueEnemigo
+                    jugador.lista_digipymons[i].vida = jugador.lista_digipymons[i].vida - perdidaSalud
+                    victorias = victorias + 1
+                    print("Tu " + digipymonJugador + "ha vencido")
+                    print("Ha perdido " + perdidaVida + " puntos de vida")
+                    print("Sus puntos de vida restantes son: " + jugador.lista_digipymons[i].vida)
+
+
+        elif(opcion == "2"):
+            print("Has huído, se te cae un digicoin al salir corriendo")
+            print("Te quedan " + jugador.consultar_digicoins)                
     
 def main(): 
-   """ bucle = True
+    """ bucle = True
     while bucle:
      jugador1 = Jugador("Pepe")
 
@@ -87,11 +119,13 @@ def main():
     if respuesta == "1":
 
     elif respuesta == "7":
-        bucle = False"""
-   jugador1 = Jugador("Pepe")
-   inventario1 = Inventario()
-   inventario1.añadir_objeto("Digipyball", 2)   
-   buscar_digipymon(jugador1, inventario1)
+    bucle = False"""
+    jugador1 = Jugador("Pepe")
+    inventario1 = Inventario()
+    lista_nombres1 = ListaNombres() 
+    enemigo1 = Enemigo(lista_nombres1.obtener_nombre_entrenador())
+    inventario1.añadir_objeto("Digipyball", 2)   
+    buscar_digipymon(jugador1, inventario1)
 main()
 
     
