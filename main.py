@@ -16,7 +16,6 @@ def generar_digipymon_aleatorio():
     nivel = random.randint(1, 3)
     digipymon1 = Digipymon(nombre, vida, ataque, tipo, nivel)
     return digipymon1
-    
 
 def menu():
     print("Elige una opcion")
@@ -27,7 +26,6 @@ def menu():
     print("5. Consultar inventario")
     print("6. Consultar Digipymons")
     print("7. Salir")
-    respuesta = 0
     respuesta = input("")
     return respuesta
     
@@ -107,7 +105,55 @@ def combate(lista_nombres, enemigo, jugador):
 
         elif(opcion == "2"):
             print("Has huído, se te cae un digicoin al salir corriendo")
-            print("Te quedan " + jugador.consultar_digicoins)                
+            print("Te quedan " + jugador.consultar_digicoins) 
+
+
+def digishop(jugador, inventario):
+    print("|-----Catalogo de Digishop-----|")
+    print("A. Digipyballs --> 5 digicoins c/u")
+    print("B. Pocion curativa (Restaura 10p de salud) --> 3 Digicoins c/u")
+    print("C. Anabolizantes (Aumenta el ataque en 5p) --> 4 Digicoins c/u")
+    print("¿Qué desea comprar?")
+    opcion_compra = input()
+    if opcion_compra == "A":
+        jugador.digipoints >= 5
+        print("Has comprado una digipyball")
+        jugador.digipoints = jugador.digipoints - 5
+        inventario.añadir_objeto("Digipyball", 1)
+    elif opcion_compra == "B":
+        jugador.digipoints >= 3
+        print("Has comprado una pocion")
+        jugador.digipoints = jugador.digipoints - 3
+        inventario.añadir_objeto("Pocion", 1)
+    elif opcion_compra == "C":
+        jugador.digipoints >= 4
+        print("Has comprado un anabolizante")
+        jugador.digipoints = jugador.digipoints - 5
+        inventario.añadir_objeto("Anabolizante", 1)
+    else:
+        print("No tienes fondos suficientes o no es la opcion correcta")
+
+def usar_item(jugador, inventario):
+    print("¿Sobre que digipymon quieres utilizar tu objeto?")
+    jugador.consultar_digipymon()
+    seleccion = input()
+    jugador.lista_digipymon[seleccion]
+
+    print(inventario()) 
+    print("¿Que objeto quieres usar?")
+    objeto = (input(""))
+    if objeto == "digipyball":
+        print("Este objeto no puede ser utilizado en tu digipymon")
+    elif objeto == "pocion":
+        jugador.lista_digipymon[seleccion].vida = jugador.lista_digipymon[seleccion].vida + 5
+        inventario.usar_objeto("Pocion")
+        print("La vida de")
+    elif objeto == "anabolizante":
+        jugador.lista_digipymon[seleccion].ataque = jugador.lista_digipymon[seleccion].ataque + 3
+        inventario.usar_objeto("Anabolizante")
+        print("")
+              
+                              
     
 def main(): 
     """ bucle = True
@@ -129,3 +175,4 @@ def main():
 main()
 
     
+   
