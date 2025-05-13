@@ -5,7 +5,6 @@ from lista_nombres import ListaNombres
 from jugador import Jugador
 import random
 
-
 def generar_digipymon_aleatorio():
     lista_nombres1 = ListaNombres()
     tipos = ["fuego", "agua", "planta"]
@@ -102,7 +101,6 @@ def combate(lista_nombres, enemigo, jugador):
                     print("Ha perdido " + perdidaVida + " puntos de vida")
                     print("Sus puntos de vida restantes son: " + jugador.lista_digipymons[i].vida)
 
-
         elif(opcion == "2"):
             print("Has huído, se te cae un digicoin al salir corriendo")
             print("Te quedan " + jugador.consultar_digicoins) 
@@ -132,7 +130,8 @@ def digishop(jugador, inventario):
         inventario.añadir_objeto("Anabolizante", 1)
     else:
         print("No tienes fondos suficientes o no es la opcion correcta")
-        
+
+
 def usar_item(jugador, inventario):
     print("¿Sobre que digipymon quieres utilizar tu objeto?")
     jugador.consultar_digipymon()
@@ -151,8 +150,7 @@ def usar_item(jugador, inventario):
     elif objeto == "anabolizante":
         jugador.lista_digipymon[seleccion].ataque = jugador.lista_digipymon[seleccion].ataque + 3
         inventario.usar_objeto("Anabolizante")
-        print("")
-              
+        print("")             
                               
     
 def main(): 
