@@ -1,8 +1,8 @@
-from Digipymon import Digipymon
-from Enemigo import Enemigo
-from Inventario import Inventario
-from ListaNombres import ListaNombres
-from Jugador import Jugador
+from digipymon import Digipymon
+from enemigo import Enemigo
+from inventario import Inventario
+from lista_nombres import ListaNombres
+from jugador import Jugador
 import random
 
 def generar_digipymon_aleatorio():
@@ -83,7 +83,7 @@ def usar_item(jugador, inventario):
         print("")
         
 def main():
-    bucle = True
+    """bucle = True
     while bucle:
         menu()
         respuesta = input()
@@ -92,5 +92,5 @@ def main():
     elif respuesta =="3":
         digishop()
     elif respuesta == "7":
-        bucle = False
+        bucle = False"""
 main()
