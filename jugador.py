@@ -15,4 +15,5 @@ class Jugador:
 
     def consultar_digipymon (self):
         for i in range(0, len(self.lista_digipymon)):
-            print(i + self.lista.digipymon[i])
+            print("Digipymon --------------------------" + str(i) + "--------------------------") 
+            print(self.lista_digipymon[i])
