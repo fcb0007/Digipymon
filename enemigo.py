@@ -1,4 +1,3 @@
-import digipymon
 class Enemigo:
         def __init__(self, nombre):
             self.nombre = nombre
