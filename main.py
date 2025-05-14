@@ -119,20 +119,17 @@ def digishop(jugador, inventario):
     print("C. Anabolizantes (Aumenta el ataque en 5p) --> 4 Digicoins c/u")
     print("¿Qué desea comprar?")
     opcion_compra = input()
-    if opcion_compra == "A":
-        jugador.digicoins >= 5
+    if opcion_compra == "A" and jugador.digicoins >= 5:
         print("Has comprado una digipyball")
         jugador.digicoins = jugador.digicoins - 5
         inventario.añadir_objeto("Digipyball", 1)
-    elif opcion_compra == "B":
-        jugador.digicoins >= 3
+    elif opcion_compra == "B" and jugador.digicoins >= 3:
         print("Has comprado una pocion")
         jugador.digicoins = jugador.digicoins - 3
         inventario.añadir_objeto("Pocion", 1)
-    elif opcion_compra == "C":
-        jugador.digicoins >= 4
+    elif opcion_compra == "C" and jugador.digicoins >= 4:
         print("Has comprado un anabolizante")
-        jugador.digicoins = jugador.digicoins - 5
+        jugador.digicoins = jugador.digicoins - 4
         inventario.añadir_objeto("Anabolizante", 1)
     else:
         print("No tienes fondos suficientes o no es la opcion correcta")
