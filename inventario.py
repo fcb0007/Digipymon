@@ -3,9 +3,9 @@ class Inventario:
         self.objetos = {}
    
     def añadir_objeto(self, nombre, cantidad):
-
+        cantidad = 0
         if nombre in self.objetos:
-            self.cantidad = self.objetos.get(nombre)
+            cantidad = self.objetos[nombre]
             self.objetos[nombre] = cantidad + 1
 
         else:
@@ -14,11 +14,11 @@ class Inventario:
     def usar_objeto(self, objeto):
         if objeto in self.objetos:
             cantidad_previa = 0
-            cantidad_previa = self.objetos.get(objeto)
+            cantidad_previa = self.objetos[objeto]
             self.objetos[objeto] = cantidad_previa - 1
             
-            if self.objetos.get(objeto) == 0:
-                del self.objetos[objeto]
+            if self.objetos[objeto] == 0:
+                del(self.objetos[objeto])
         else:
             print("No dispones de ese objeto")
 
