@@ -170,9 +170,9 @@ def main():
         print("5. Consultar inventario")
         print("6. Consultar Digipymons")
         print("7. Salir")
-        respuesta = input("Introduce el valor")
+        respuesta = input("Introduce el valor: ")
         
-        print("adfasdfs" + respuesta)
+        print(respuesta)
         if respuesta == "1":
             buscar_digipymon(jugador1, inventario1)
         elif respuesta == "2":
@@ -182,7 +182,7 @@ def main():
         elif respuesta == "4":
             usar_item(jugador1, inventario1)
         elif respuesta == "5":
-            print(inventario1())
+            print(inventario1.objetos)
         elif respuesta == "6":
             print(jugador1.consultar_digipymon())
         elif respuesta == "7":
