@@ -156,31 +156,43 @@ def usar_item(jugador, inventario):
         print("")             
                               
     
-def main(): 
-    bucle = True
-    while bucle:
-        menu()
-        respuesta = input()
-    if respuesta == "1":
-        buscar_digipymon()
-    elif respuesta == "2":
-        combate()
-    elif respuesta == "3":
-        digishop()
-    elif respuesta == "4":
-        usar_item
-    elif respuesta == "5":
-        print(inventario1())
-    elif respuesta == "6":
-        print(jugador1.consultar_digipymon)
-    elif respuesta == "7":
-        bucle = False
-    else:
-        print("Esa opcion no es valida")
-        return
-        
+def main():
     jugador1 = Jugador("Pepe")
     inventario1 = Inventario()
+
+    bucle = True
+    while bucle:
+        print("Elige una opcion")
+        print("1. Buscar Digipymon") 
+        print("2. Luchar contra un entrenador")
+        print("3. Ir a la teinda")
+        print("4. Usar objeto")
+        print("5. Consultar inventario")
+        print("6. Consultar Digipymons")
+        print("7. Salir")
+        respuesta = input("Introduce el valor")
+        
+        print("adfasdfs" + respuesta)
+        if respuesta == "1":
+            buscar_digipymon(jugador1, inventario1)
+        elif respuesta == "2":
+            combate(jugador1)
+        elif respuesta == "3":
+            digishop(jugador1, inventario1)
+        elif respuesta == "4":
+            usar_item(jugador1, inventario1)
+        elif respuesta == "5":
+            print(inventario1())
+        elif respuesta == "6":
+            print(jugador1.consultar_digipymon())
+        elif respuesta == "7":
+            print("Nos vemos")
+            bucle = False
+        else:
+            print("Esa opcion no es valida")
+        
+        
+    
     
     lista_nombres1 = ListaNombres() 
     enemigo1 = Enemigo(lista_nombres1.obtener_nombre_entrenador())
