@@ -3,7 +3,7 @@ class Jugador:
         self.nombre = nombre
         self.lista_digipymon = []
         self.cantidad_digipymon = 0
-        self.digicoins = 0
+        self.digicoins = 10
 
     def consultar_digicoin (self):
         return self.digicoins
