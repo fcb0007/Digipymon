@@ -155,16 +155,24 @@ def usar_item(jugador, inventario):
                               
     
 def main(): 
-    """ bucle = True
+    bucle = True
     while bucle:
-     jugador1 = Jugador("Pepe")
-
-    
-    respuesta = menu()
+        menu()
+        respuesta = input()
     if respuesta == "1":
-
+        buscar_digipymon()
+    elif respuesta == "2":
+        combate()
+    elif respuesta == "3":
+        digishop()
+    elif respuesta == "4":
+        usar_item
+    elif respuesta == "5":
+        print(inventario1())
+    elif respuesta == "6":
+        print(jugador1.consultar_digipymon)
     elif respuesta == "7":
-    bucle = False"""
+        bucle = False
 
     jugador1 = Jugador("Pepe")
     inventario1 = Inventario()
