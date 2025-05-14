@@ -175,7 +175,10 @@ def main():
         print(jugador1.consultar_digipymon)
     elif respuesta == "7":
         bucle = False
-
+    else:
+        print("Esa opcion no es valida")
+        return
+        
     jugador1 = Jugador("Pepe")
     inventario1 = Inventario()
     
