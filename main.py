@@ -69,7 +69,9 @@ def buscar_digipymon(jugador, inventario):
         else:
             print("Introduce una opción correcta")            
 
-def combate(lista_nombres, enemigo, jugador):
+def combate(jugador: Jugador):    
+    lista_nombres = ListaNombres()
+    enemigo = Enemigo(lista_nombres.obtener_nombre_entrenador())
     bucleCombate = True
     for i in range(0, jugador.cantidad_digipymon ):
         enemigo.añadir_digipymon(lista_nombres.obtener_nombre_digipymon)
