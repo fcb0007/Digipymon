@@ -112,20 +112,20 @@ def combate(lista_nombres, enemigo, jugador):
 
 def digishop(jugador, inventario):
     print("|-----Catalogo de Digishop-----|")
-    print("A. Digipyballs --> 5 digicoins c/u")
-    print("B. Pocion curativa (Restaura 10p de salud) --> 3 Digicoins c/u")
-    print("C. Anabolizantes (Aumenta el ataque en 5p) --> 4 Digicoins c/u")
+    print("1. Digipyballs --> 5 digicoins c/u")
+    print("2. Pocion curativa (Restaura 10p de salud) --> 3 Digicoins c/u")
+    print("3. Anabolizantes (Aumenta el ataque en 5p) --> 4 Digicoins c/u")
     print("¿Qué desea comprar?")
     opcion_compra = input()
-    if opcion_compra == "A" and jugador.digicoins >= 5:
+    if opcion_compra == "1" and jugador.digicoins >= 5:
         print("Has comprado una digipyball")
         jugador.digicoins = jugador.digicoins - 5
         inventario.añadir_objeto("Digipyball", 1)
-    elif opcion_compra == "B" and jugador.digicoins >= 3:
+    elif opcion_compra == "2" and jugador.digicoins >= 3:
         print("Has comprado una pocion")
         jugador.digicoins = jugador.digicoins - 3
         inventario.añadir_objeto("Pocion", 1)
-    elif opcion_compra == "C" and jugador.digicoins >= 4:
+    elif opcion_compra == "3" and jugador.digicoins >= 4:
         print("Has comprado un anabolizante")
         jugador.digicoins = jugador.digicoins - 4
         inventario.añadir_objeto("Anabolizante", 1)
