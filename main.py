@@ -81,11 +81,11 @@ def buscar_digipymon(jugador, inventario):
 def combate(jugador: Jugador):    
     lista_nombres = ListaNombres()
     enemigo = Enemigo(lista_nombres.obtener_nombre_entrenador())
-    bucleCombate = True
+    bucle_combate = True
     for i in range(jugador.cantidad_digipymon):
         enemigo.añadir_digipymon(lista_nombres.obtener_nombre_digipymon)
 
-    while(bucleCombate):
+    while bucle_combate:
         print("Te has encontrado con " + enemigo.nombre + " y te reta a un combate!")
         print("¿Quieres luchar?")
         print("1. Sí")
