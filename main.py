@@ -87,30 +87,61 @@ def combate(jugador: Jugador):
             victorias = 0    
             derrotas = 0
             for i in range (jugador.cantidad_digipymons):
-                digipymonJugador = jugador.lista_digypimons[i].nombre
-                digipymonEnemigo = enemigo.lista_digypimons[i].nombre
-                ataqueEnemigo = enemigo.lista_digipymons[i].ataque
-                ataqueJugador = jugador.lista_digipymons[i].ataque
+                digipymon_jugador = jugador.lista_digypimons[i].nombre
+                digipymon_enemigo = enemigo.lista_digypimons[i].nombre
+                ataque_enemigo = enemigo.lista_digipymons[i].ataque
+                ataque_jugador = jugador.lista_digipymons[i].ataque
 
-                print("Tu " + digipymonJugador)
+                print("Tu " + digipymon_jugador)
                 print("Se enfrenta a...")
-                print(digipymonEnemigo)
-                
-                if (ataqueJugador > ataqueEnemigo):
-                    victorias = victorias + 1
-                    jugador.lista_digipymons[i].vida = jugador.lista_digipymons[i].vida - ataqueEnemigo
-                    print("Tu " + digipymonJugador + "ha vencido")
-                    print("Ha perdido " + ataqueEnemigo + " puntos de vida")
-                    print("Sus puntos de vida restantes son: " + jugador.lista_digipymons[i].vida)
+                print(digipymon_enemigo)
+                if jugador.lista_digipymon[i].vida <= 0:
+                    print(f"Has perdido, tu digipymon {jugador.lista_digipymon[i].nombre}, tiene {jugador.lista_digipymon[i].vida} de vida")
+                    derrotas += 1
+                elif (ataque_jugador > ataque_enemigo):
+                    victorias += 1
+                    jugador.lista_digipymon[i].vida = jugador.lista_digipymon[i].vida - ataque_enemigo
+                    print("Tu " + digipymon_jugador + "ha vencido")
+                    print("Ha perdido " + ataque_enemigo + " puntos de vida")
+                    print("Sus puntos de vida restantes son: " + jugador.lista_digipymon[i].vida)
                     print("Llevas " + str(victorias) + " victorias y " + str(derrotas) + " derrotas")
-                elif (ataqueEnemigo > ataqueJugador):
-                    perdidaVida = ataqueJugador - ataqueEnemigo
-                    print("Has perdido el combate")
-                    
+                elif (ataque_enemigo > ataque_jugador):
+                    derrotas += 1
+                    perdida_vida = ataque_jugador - ataque_enemigo
+                    jugador.lista_digipymon[i].vida -= perdida_vida
+                    if jugador.lista_digipymon[i].vida < 0:
+                        jugador.lista_digipymon[i].vida = 0
+                    print(f"Has perdido el combate, tu digipymon ha perdido {perdida_vida}, puntos de vida")
+                    print(f"Su salud restante es de {jugador.lista_digipymon[i].vida}")
+
+                elif ataque_enemigo == ataque_jugador:
+                    daño_aleatorio = random.randint(1,5)
+                    print(f"Has empatado, en el combate tu digipymon ha sufrido un daño de {daño_aleatorio}")
+                    jugador.lista_digipymon[i].vida -= daño_aleatorio
+                    if jugador.lista_digipymon[i].vida < 0:
+                        jugador.lista_digipymon[i].vida = 0
+                    print(f"Su salud restante es: {jugador.lista_digipymon[i].vida}")
+
+            if victorias > derrotas:
+                jugador.digicoins += victorias
+                print(f"Has ganado! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
+                print(f"Ganas {victorias} digicoins, tus digicoins totales son {jugador.digicoins}")
+            elif derrotas > victorias:
+                jugador.digicoins -= derrotas
+                if jugador.digicoins < 0:
+                    jugador.digicoins = 0
+                print(f"Has perdido! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
+                print(f"Pierdes {derrotas} digicoins, tus digicoins totales son {jugador.digicoins}")
+
+            elif victorias == derrotas:
+                print(f"Ha habido un empate, Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")        
 
         elif(opcion == "2"):
+            jugador.digicoins -= 1
+            if jugador.digicoins < 0:
+                jugador.digicoins = 0
             print("Has huído, se te cae un digicoin al salir corriendo")
-            print("Te quedan " + jugador.consultar_digicoins()) 
+            print(f"Te quedan {jugador.consultar_digicoins()} digicoins") 
 
 
 def digishop(jugador, inventario):
@@ -186,7 +217,6 @@ def main():
         elif respuesta == "4":
             usar_item(jugador1, inventario1)
         elif respuesta == "5":
-            #print(inventario1.objetos)
             for nombre, cantidad in inventario1.objetos.items():
                 print(f"Item: {nombre}, cantidad: {cantidad} ")
         elif respuesta == "6":
