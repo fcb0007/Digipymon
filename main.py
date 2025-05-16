@@ -21,7 +21,7 @@ def menu():
     print("Elige una opcion")
     print("1. Buscar Digipymon") 
     print("2. Luchar contra un entrenador")
-    print("3. Ir a la teinda")
+    print("3. Ir a la tienda")
     print("4. Usar objeto")
     print("5. Consultar inventario")
     print("6. Consultar Digipymons")
@@ -110,7 +110,7 @@ def combate(jugador: Jugador):
                 elif jugador.lista_digipymon[i].ataque > enemigo.lista_digipymon[i].ataque:
                     victorias += 1
                     jugador.lista_digipymon[i].vida = jugador.lista_digipymon[i].vida - ataque_enemigo
-                    print("Tu " + digipymon_jugador + "ha vencido")
+                    print(f"Tu {digipymon_jugador} ha vencido")
                     print(f"Ha perdido {ataque_enemigo} puntos de vida")
                     print(f"Sus puntos de vida restantes son: {jugador.lista_digipymon[i].vida}")
                     print(f"Llevas {victorias} victorias y {derrotas} derrotas")
@@ -169,7 +169,7 @@ def combate(jugador: Jugador):
 
 def digishop(jugador, inventario):
     print("|-----Catalogo de Digishop-----|")
-    print(f"-----Monedero actual: {jugador.digicoins}-----")
+    print(f"Monedero actual: {jugador.digicoins} digicoins")
     print("1. Digipyballs --> 5 digicoins c/u")
     print("2. Pocion curativa (Restaura 10p de salud) --> 3 Digicoins c/u")
     print("3. Anabolizantes (Aumenta el ataque en 5p) --> 4 Digicoins c/u")
@@ -198,30 +198,36 @@ def digishop(jugador, inventario):
 
 def usar_item(jugador, inventario):
     if jugador.lista_digipymon:
-        print("¿Sobre que digipymon quieres utilizar tu objeto?")
-        jugador.consultar_digipymon()
-        seleccion = int(input())
-        jugador.lista_digipymon[seleccion]
+        if inventario.objetos:
+            print("¿Sobre que digipymon quieres utilizar tu objeto?")
+            jugador.consultar_digipymon()
+            seleccion = int(input())
+            jugador.lista_digipymon[seleccion]
 
-        print(inventario.objetos) 
-        print("¿Que objeto quieres usar?")
-        objeto = input("")
-
-        if objeto == "Digipyball":
-            print("Este objeto no puede ser utilizado en tu digipymon")
-
-        elif objeto == "pocion":
+            for nombre, cantidad in inventario.objetos.items():
+                print(f"Item: {nombre}, cantidad: {cantidad} ")
+                
+            print("¿Que objeto quieres usar? (introduce 'salir' para volver al menú)")
+            objeto = input("")
             
-            jugador.lista_digipymon[seleccion].vida += 5
-            inventario.usar_objeto("Pocion")
-            print(f"Has usado una poción en tu {jugador.lista_digipymon[seleccion].nombre}, su vida ha aumentado de {jugador.lista_digipymon[seleccion].ataque}")
+            if objeto.lower() == "digipyball":
+                print("Este objeto no puede ser utilizado en tu digipymon")
 
-            print("La vida de")
+            elif objeto.lower() == "pocion":
+                vida_previa = jugador.lista_digipymon[seleccion].vida                
+                jugador.lista_digipymon[seleccion].vida += 5
+                inventario.usar_objeto("Pocion")
+                print(f"Has usado una poción en tu {jugador.lista_digipymon[seleccion].nombre}, su vida ha aumentado de {jugador.lista_digipymon[seleccion].vida} a {vida_previa}")
 
-        elif objeto == "anabolizante":
-            jugador.lista_digipymon[seleccion].ataque += 3
-            inventario.usar_objeto("Anabolizante")
-            print(f"Has usado anabolizantes en tu {jugador.lista_digipymon[seleccion].nombre}, su ataque actual es de {jugador.lista_digipymon[seleccion].ataque}")
+            elif objeto.lower() == "anabolizante":
+                jugador.lista_digipymon[seleccion].ataque += 3
+                inventario.usar_objeto("Anabolizante")
+                print(f"Has usado anabolizantes en tu {jugador.lista_digipymon[seleccion].nombre}, su ataque actual es de {jugador.lista_digipymon[seleccion].ataque}")
+
+            elif objeto == "salir":
+                pass
+        else:
+            print("No tienes objetos que usar!")
     else:
         print("No tienes digipymons sobre los que usar tus items")             
                                 
@@ -254,12 +260,12 @@ def main():
             else:
                 print("No tienes items que mostrar")        
         elif respuesta == "6":
-            print(jugador1.consultar_digipymon())
+            jugador1.consultar_digipymon()
         elif respuesta == "7":
-            print("Nos vemos")
+            print("Nos vemos!")
             bucle = False
         else:
-            print("Esa opcion no es valida")
+            print("Esa opción no es válida")
        
 main()    
         
