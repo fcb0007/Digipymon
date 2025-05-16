@@ -48,13 +48,19 @@ def buscar_digipymon(jugador, inventario):
                 if random.randint(1, 100) < probabilidad_captura:
                     print("Has capturado un " + digipymon_encontrado.nombre + "!!")
                     jugador.lista_digipymon.append(digipymon_encontrado)
-                    print(f"Te quedan {inventario.objetos["Digipyball"]} digipyballs")                    
+                    if "Digipyball" in inventario.objetos:
+                        print(f"Te quedan {inventario.objetos["Digipyball"]} digipyballs")
+                    else:
+                        print("No te quedan digipyballs!")                        
                     salirBucle = False
 
                 else:
                     print("El digipymon " + digipymon_encontrado.nombre + " ha escapado!")
-                    print(f"Te quedan {inventario.objetos["Digipyball"]} digipyballs")
-                    salirBucle = False    
+                    if "Digipyball" in inventario.objetos:
+                        print(f"Te quedan {inventario.objetos["Digipyball"]} digipyballs")
+                    else:
+                        print("No te quedan digipyballs!")                        
+                    salirBucle = False 
 
             elif "Digipyball" not in inventario.objetos:
                 print("No te quedan digipyballs")
@@ -76,7 +82,7 @@ def combate(jugador: Jugador):
     lista_nombres = ListaNombres()
     enemigo = Enemigo(lista_nombres.obtener_nombre_entrenador())
     bucleCombate = True
-    for i in range(0, jugador.cantidad_digipymon ):
+    for i in range(jugador.cantidad_digipymon):
         enemigo.añadir_digipymon(lista_nombres.obtener_nombre_digipymon)
 
     while(bucleCombate):
@@ -153,6 +159,7 @@ def combate(jugador: Jugador):
 
 def digishop(jugador, inventario):
     print("|-----Catalogo de Digishop-----|")
+    print(f"-----Monedero actual: {jugador.digicoins}-----")
     print("1. Digipyballs --> 5 digicoins c/u")
     print("2. Pocion curativa (Restaura 10p de salud) --> 3 Digicoins c/u")
     print("3. Anabolizantes (Aumenta el ataque en 5p) --> 4 Digicoins c/u")
@@ -175,20 +182,22 @@ def digishop(jugador, inventario):
 
     else:
         print("No tienes fondos suficientes o no es la opcion correcta")
+    
+    print(f"Te quedan {jugador.digicoins} digicoins")
 
 
 def usar_item(jugador, inventario):
     if jugador.lista_digipymon:
         print("¿Sobre que digipymon quieres utilizar tu objeto?")
         jugador.consultar_digipymon()
-        seleccion = input()
+        seleccion = int(input())
         jugador.lista_digipymon[seleccion]
 
         print(inventario.objetos) 
         print("¿Que objeto quieres usar?")
-        objeto = (input(""))
+        objeto = input("")
 
-        if objeto == "digipyball":
+        if objeto == "Digipyball":
             print("Este objeto no puede ser utilizado en tu digipymon")
 
         elif objeto == "pocion":
@@ -208,20 +217,17 @@ def usar_item(jugador, inventario):
                                 
     
 def main():
-    jugador1 = Jugador("Pepe")
+    print("Bienvenido a Digipymon!, Aquí empieza tu aventura...")
+    print("¿Cómo te llamas?")
+    nombre_jugador = input("")
+    jugador1 = Jugador(nombre_jugador)
     inventario1 = Inventario()
-    inventario1.añadir_objeto("Digipyball", 2) 
+    print("Al comenzar en.... recibes una poción y tres digipyballs")
+    inventario1.añadir_objeto("Digipyball", 3)
+    
     bucle = True
     while bucle:
-        print("Elige una opcion")
-        print("1. Buscar Digipymon") 
-        print("2. Luchar contra un entrenador")
-        print("3. Ir a la teinda")
-        print("4. Usar objeto")
-        print("5. Consultar inventario")
-        print("6. Consultar Digipymons")
-        print("7. Salir")
-        respuesta = input("Introduce el valor: ")
+        respuesta = menu()
         
         print(respuesta)
         if respuesta == "1":
@@ -233,8 +239,11 @@ def main():
         elif respuesta == "4":
             usar_item(jugador1, inventario1)
         elif respuesta == "5":
-            for nombre, cantidad in inventario1.objetos.items():
-                print(f"Item: {nombre}, cantidad: {cantidad} ")
+            if inventario1.objetos:
+                for nombre, cantidad in inventario1.objetos.items():
+                    print(f"Item: {nombre}, cantidad: {cantidad} ")
+            else:
+                print("No tienes items que mostrar")        
         elif respuesta == "6":
             print(jugador1.consultar_digipymon())
         elif respuesta == "7":
