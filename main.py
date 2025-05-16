@@ -83,8 +83,8 @@ def combate(jugador: Jugador):
     lista_nombres = ListaNombres()
     enemigo = Enemigo(lista_nombres.obtener_nombre_entrenador())
     bucle_combate = True
-    for i in range(jugador.cantidad_digipymon):
-        enemigo.añadir_digipymon(lista_nombres.obtener_nombre_digipymon)
+    for i in range(len(jugador.lista_digipymon)):
+        enemigo.añadir_digipymon(generar_digipymon_aleatorio())
 
     while bucle_combate:
         print("Te has encontrado con " + enemigo.nombre + " y te reta a un combate!")
@@ -108,15 +108,17 @@ def combate(jugador: Jugador):
                     print(f"Has perdido, tu digipymon {jugador.lista_digipymon[i].nombre}, tiene {jugador.lista_digipymon[i].vida} de vida")
                     derrotas += 1
 
-                elif jugador.lista_digipymon[i].ataque > enemigo.lista_digimon[i].ataque:
+                elif jugador.lista_digipymon[i].ataque > enemigo.lista_digipymon[i].ataque:
                     victorias += 1
                     jugador.lista_digipymon[i].vida = jugador.lista_digipymon[i].vida - ataque_enemigo
                     print("Tu " + digipymon_jugador + "ha vencido")
-                    print("Ha perdido " + ataque_enemigo + " puntos de vida")
-                    print("Sus puntos de vida restantes son: " + jugador.lista_digipymon[i].vida)
-                    print("Llevas " + str(victorias) + " victorias y " + str(derrotas) + " derrotas")
+                    print(f"Ha perdido {ataque_enemigo} puntos de vida")
+                    print(f"Sus puntos de vida restantes son: {jugador.lista_digipymon[i].vida}")
+                    print(f"Llevas {victorias} victorias y {derrotas} derrotas")
+                    bucle_combate = False
 
-                elif enemigo.lista_digimon[i].ataque > jugador.lista_digipymon[i].ataque:
+
+                elif ataque_enemigo > ataque_jugador:
                     derrotas += 1
                     perdida_vida = ataque_jugador - ataque_enemigo
                     jugador.lista_digipymon[i].vida -= perdida_vida
@@ -125,7 +127,7 @@ def combate(jugador: Jugador):
                     print(f"Has perdido el combate, tu digipymon ha perdido {perdida_vida}, puntos de vida")
                     print(f"Su salud restante es de {jugador.lista_digipymon[i].vida}")
 
-                elif enemigo.lista_digimon[i].ataque == jugador.lista_digipymon[i].ataque:
+                elif enemigo.lista_digipymon[i].ataque == jugador.lista_digipymon[i].ataque:
                     daño_aleatorio = random.randint(1,5)
                     print(f"Has empatado, en el combate tu digipymon ha sufrido un daño de {daño_aleatorio}")
                     jugador.lista_digipymon[i].vida -= daño_aleatorio
@@ -133,10 +135,13 @@ def combate(jugador: Jugador):
                         jugador.lista_digipymon[i].vida = 0
                     print(f"Su salud restante es: {jugador.lista_digipymon[i].vida}")
 
+
             if victorias > derrotas:
                 jugador.digicoins += victorias
                 print(f"Has ganado! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
                 print(f"Ganas {victorias} digicoins, tus digicoins totales son {jugador.digicoins}")
+                bucle_combate = False
+
 
             elif derrotas > victorias:
                 jugador.digicoins -= derrotas
@@ -145,9 +150,13 @@ def combate(jugador: Jugador):
                     jugador.digicoins = 0
                 print(f"Has perdido! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
                 print(f"Pierdes {derrotas} digicoins, tus digicoins totales son {jugador.digicoins}")
+                bucle_combate = False
+
 
             elif victorias == derrotas:
-                print(f"Ha habido un empate, Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")        
+                print(f"Ha habido un empate, Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
+                bucle_combate = False
+       
 
         elif opcion == "2":
             jugador.digicoins -= 1
@@ -155,7 +164,8 @@ def combate(jugador: Jugador):
             if jugador.digicoins < 0:
                 jugador.digicoins = 0
             print("Has huído, se te cae un digicoin al salir corriendo")
-            print(f"Te quedan {jugador.consultar_digicoins()} digicoins") 
+            print(f"Te quedan {jugador.consultar_digicoins()} digicoins")
+            bucle_combate = False
 
 
 def digishop(jugador, inventario):
