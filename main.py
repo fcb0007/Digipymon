@@ -48,6 +48,7 @@ def buscar_digipymon(jugador, inventario):
                 if random.randint(1, 100) < probabilidad_captura:
                     print("Has capturado un " + digipymon_encontrado.nombre + "!!")
                     jugador.lista_digipymon.append(digipymon_encontrado)
+                    jugador.cantidad_digipymon += 1
                     if "Digipyball" in inventario.objetos:
                         print(f"Te quedan {inventario.objetos["Digipyball"]} digipyballs")
                     else:
@@ -95,8 +96,8 @@ def combate(jugador: Jugador):
             victorias = 0    
             derrotas = 0
             for i in range (jugador.cantidad_digipymon):
-                digipymon_jugador = jugador.lista_digypimon[i].nombre
-                digipymon_enemigo = enemigo.lista_digypimon[i].nombre
+                digipymon_jugador = jugador.lista_digipymon[i].nombre
+                digipymon_enemigo = enemigo.lista_digipymon[i].nombre
                 ataque_enemigo = enemigo.lista_digipymon[i].ataque
                 ataque_jugador = jugador.lista_digipymon[i].ataque
 
@@ -107,7 +108,7 @@ def combate(jugador: Jugador):
                     print(f"Has perdido, tu digipymon {jugador.lista_digipymon[i].nombre}, tiene {jugador.lista_digipymon[i].vida} de vida")
                     derrotas += 1
 
-                elif ataque_jugador > ataque_enemigo:
+                elif jugador.lista_digipymon[i].ataque > enemigo.lista_digimon[i].ataque:
                     victorias += 1
                     jugador.lista_digipymon[i].vida = jugador.lista_digipymon[i].vida - ataque_enemigo
                     print("Tu " + digipymon_jugador + "ha vencido")
@@ -115,7 +116,7 @@ def combate(jugador: Jugador):
                     print("Sus puntos de vida restantes son: " + jugador.lista_digipymon[i].vida)
                     print("Llevas " + str(victorias) + " victorias y " + str(derrotas) + " derrotas")
 
-                elif ataque_enemigo > ataque_jugador:
+                elif enemigo.lista_digimon[i].ataque > jugador.lista_digipymon[i].ataque:
                     derrotas += 1
                     perdida_vida = ataque_jugador - ataque_enemigo
                     jugador.lista_digipymon[i].vida -= perdida_vida
@@ -124,7 +125,7 @@ def combate(jugador: Jugador):
                     print(f"Has perdido el combate, tu digipymon ha perdido {perdida_vida}, puntos de vida")
                     print(f"Su salud restante es de {jugador.lista_digipymon[i].vida}")
 
-                elif ataque_enemigo == ataque_jugador:
+                elif enemigo.lista_digimon[i].ataque == jugador.lista_digipymon[i].ataque:
                     daño_aleatorio = random.randint(1,5)
                     print(f"Has empatado, en el combate tu digipymon ha sufrido un daño de {daño_aleatorio}")
                     jugador.lista_digipymon[i].vida -= daño_aleatorio
