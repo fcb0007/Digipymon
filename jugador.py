@@ -13,6 +13,11 @@ class Jugador:
         self.cantidad_digipymon = self.cantidad_digipymon + 1
 
     def consultar_digipymon (self):
-        for i in range(len(self.lista_digipymon)):
-            print("Digipymon --------------------------" + str(i) + "--------------------------") 
-            print(self.lista_digipymon[i])
+        if self.lista_digipymon:
+            contador = 0
+            for digipymon in self.lista_digipymon:
+                print("Digipymon --------------------------" + str(contador) + "--------------------------") 
+                print(digipymon)
+                contador += 1
+        else:
+            print("No tienes digipymons que mostrar")

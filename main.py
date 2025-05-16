@@ -238,8 +238,7 @@ def main():
     
     bucle = True
     while bucle:
-        respuesta = menu()
-        
+        respuesta = menu()        
         print(respuesta)
         if respuesta == "1":
             buscar_digipymon(jugador1, inventario1)
@@ -262,20 +261,7 @@ def main():
             bucle = False
         else:
             print("Esa opcion no es valida")
+       
+main()    
         
-        
-    
-    
-    lista_nombres1 = ListaNombres() 
-    enemigo1 = Enemigo(lista_nombres1.obtener_nombre_entrenador())
-      
-    buscar_digipymon(jugador1, inventario1)
-    jugador1.añadir_digipymon(generar_digipymon_aleatorio())
-    jugador1.consultar_digipymon()
-    digishop(jugador1, inventario1)
-    print(inventario1.objetos)
-   
-main()
-
-    
    
