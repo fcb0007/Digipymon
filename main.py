@@ -29,14 +29,14 @@ def menu():
     respuesta = input("")
     return respuesta
     
-def buscar_digipymon(jugador, inventario):
+def buscar_digipymon(jugador: Jugador, inventario):
     digipymon_encontrado = generar_digipymon_aleatorio()
     probabilidad_captura = 100 - (digipymon_encontrado.nivel *10)
     salirBucle = True
     while(salirBucle):
         print("Has encontrado un...")
         print(digipymon_encontrado)
-        print("La probabilidad de captura al " + digipymon_encontrado.nombre + " es de un " + str(probabilidad_captura) + "%")
+        print(f"La probabilidad de captura al {digipymon_encontrado.nombre} es de un {probabilidad_captura}%")
         print("¿Deseas capturar al digipymon?")
         print("1. Sí")
         print("2. No")
@@ -47,8 +47,7 @@ def buscar_digipymon(jugador, inventario):
 
                 if random.randint(1, 100) < probabilidad_captura:
                     print("Has capturado un " + digipymon_encontrado.nombre + "!!")
-                    jugador.lista_digipymon.append(digipymon_encontrado)
-                    jugador.cantidad_digipymon += 1
+                    jugador.añadir_digipymon(digipymon_encontrado)
                     if "Digipyball" in inventario.objetos:
                         print(f"Te quedan {inventario.objetos["Digipyball"]} digipyballs")
                     else:
