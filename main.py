@@ -47,11 +47,13 @@ def buscar_digipymon(jugador, inventario):
 
                 if random.randint(1, 100) < probabilidad_captura:
                     print("Has capturado un " + digipymon_encontrado.nombre + "!!")
-                    jugador.lista_digipymon.append(digipymon_encontrado)                    
+                    jugador.lista_digipymon.append(digipymon_encontrado)
+                    print(f"Te quedan {inventario.objetos["Digipyball"]} digipyballs")                    
                     salirBucle = False
 
                 else:
                     print("El digipymon " + digipymon_encontrado.nombre + " ha escapado!")
+                    print(f"Te quedan {inventario.objetos["Digipyball"]} digipyballs")
                     salirBucle = False    
 
             elif "Digipyball" not in inventario.objetos:
@@ -63,7 +65,7 @@ def buscar_digipymon(jugador, inventario):
                 print("Ya tienes 6 digipymons, no puedes capturar más")
                 print("El digipymon " + digipymon_encontrado.nombre + " ha escapado!")
                 salirBucle = False
-
+       
         elif opcion == "2":
             print("Has huido")
             salirBucle = False
@@ -83,7 +85,7 @@ def combate(jugador: Jugador):
         print("1. Sí")
         print("2. No")
         opcion = input()
-        if (opcion == "1"):
+        if opcion == "1":
             victorias = 0    
             derrotas = 0
             for i in range (jugador.cantidad_digipymons):
@@ -98,14 +100,16 @@ def combate(jugador: Jugador):
                 if jugador.lista_digipymon[i].vida <= 0:
                     print(f"Has perdido, tu digipymon {jugador.lista_digipymon[i].nombre}, tiene {jugador.lista_digipymon[i].vida} de vida")
                     derrotas += 1
-                elif (ataque_jugador > ataque_enemigo):
+
+                elif ataque_jugador > ataque_enemigo:
                     victorias += 1
                     jugador.lista_digipymon[i].vida = jugador.lista_digipymon[i].vida - ataque_enemigo
                     print("Tu " + digipymon_jugador + "ha vencido")
                     print("Ha perdido " + ataque_enemigo + " puntos de vida")
                     print("Sus puntos de vida restantes son: " + jugador.lista_digipymon[i].vida)
                     print("Llevas " + str(victorias) + " victorias y " + str(derrotas) + " derrotas")
-                elif (ataque_enemigo > ataque_jugador):
+
+                elif ataque_enemigo > ataque_jugador:
                     derrotas += 1
                     perdida_vida = ataque_jugador - ataque_enemigo
                     jugador.lista_digipymon[i].vida -= perdida_vida
@@ -126,8 +130,10 @@ def combate(jugador: Jugador):
                 jugador.digicoins += victorias
                 print(f"Has ganado! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
                 print(f"Ganas {victorias} digicoins, tus digicoins totales son {jugador.digicoins}")
+
             elif derrotas > victorias:
                 jugador.digicoins -= derrotas
+
                 if jugador.digicoins < 0:
                     jugador.digicoins = 0
                 print(f"Has perdido! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
@@ -136,8 +142,9 @@ def combate(jugador: Jugador):
             elif victorias == derrotas:
                 print(f"Ha habido un empate, Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")        
 
-        elif(opcion == "2"):
+        elif opcion == "2":
             jugador.digicoins -= 1
+
             if jugador.digicoins < 0:
                 jugador.digicoins = 0
             print("Has huído, se te cae un digicoin al salir corriendo")
@@ -155,14 +162,17 @@ def digishop(jugador, inventario):
         print("Has comprado una digipyball")
         jugador.digicoins = jugador.digicoins - 5
         inventario.añadir_objeto("Digipyball", 1)
+
     elif opcion_compra == "2" and jugador.digicoins >= 3:
         print("Has comprado una pocion")
         jugador.digicoins = jugador.digicoins - 3
         inventario.añadir_objeto("Pocion", 1)
+
     elif opcion_compra == "3" and jugador.digicoins >= 4:
         print("Has comprado un anabolizante")
         jugador.digicoins = jugador.digicoins - 4
         inventario.añadir_objeto("Anabolizante", 1)
+
     else:
         print("No tienes fondos suficientes o no es la opcion correcta")
 
@@ -177,16 +187,22 @@ def usar_item(jugador, inventario):
         print(inventario.objetos) 
         print("¿Que objeto quieres usar?")
         objeto = (input(""))
+
         if objeto == "digipyball":
             print("Este objeto no puede ser utilizado en tu digipymon")
+
         elif objeto == "pocion":
-            jugador.lista_digipymon[seleccion].vida = jugador.lista_digipymon[seleccion].vida + 5
+            
+            jugador.lista_digipymon[seleccion].vida += 5
             inventario.usar_objeto("Pocion")
+            print(f"Has usado una poción en tu {jugador.lista_digipymon[seleccion].nombre}, su vida ha aumentado de {jugador.lista_digipymon[seleccion].ataque}")
+
             print("La vida de")
+
         elif objeto == "anabolizante":
-            jugador.lista_digipymon[seleccion].ataque = jugador.lista_digipymon[seleccion].ataque + 3
+            jugador.lista_digipymon[seleccion].ataque += 3
             inventario.usar_objeto("Anabolizante")
-            print("")
+            print(f"Has usado anabolizantes en tu {jugador.lista_digipymon[seleccion].nombre}, su ataque actual es de {jugador.lista_digipymon[seleccion].ataque}")
     else:
         print("No tienes digipymons sobre los que usar tus items")             
                                 
