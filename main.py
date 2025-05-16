@@ -94,11 +94,11 @@ def combate(jugador: Jugador):
         if opcion == "1":
             victorias = 0    
             derrotas = 0
-            for i in range (jugador.cantidad_digipymons):
-                digipymon_jugador = jugador.lista_digypimons[i].nombre
-                digipymon_enemigo = enemigo.lista_digypimons[i].nombre
-                ataque_enemigo = enemigo.lista_digipymons[i].ataque
-                ataque_jugador = jugador.lista_digipymons[i].ataque
+            for i in range (jugador.cantidad_digipymon):
+                digipymon_jugador = jugador.lista_digypimon[i].nombre
+                digipymon_enemigo = enemigo.lista_digypimon[i].nombre
+                ataque_enemigo = enemigo.lista_digipymon[i].ataque
+                ataque_jugador = jugador.lista_digipymon[i].ataque
 
                 print("Tu " + digipymon_jugador)
                 print("Se enfrenta a...")
