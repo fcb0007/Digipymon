@@ -326,12 +326,11 @@ def main():
     Función que ejecuta el bucle principal del juego, crea una instancia de jugador otra de
     inventario y va llamando a las difentes funciones del juego según la opción del menú que elijamos
     """
-    print("¡Bienvenido al mundo de Digipymon!")
-    print("En este mundo habitan criaturas extraordinarias llamadas Digipymons.")
-    print("Algunos los entrenan, otros los coleccionan... pero tú estás a punto de forjar tu propio camino.")
-    print("Hace años, los Digipymons vivían en equilibrio con los humanos, pero últimamente los encuentros salvajes son más frecuentes...")
-    print("Tu misión será descubrir qué está ocurriendo, capturar y entrenar Digipymons, y convertirte en el mejor entrenador del continente.")
-    print()
+    print("Bienvenido al mundo Davanteselia, un mundo lleno de criaturas extraordinarias que ayudan a sus habitantes llamadas " \
+    "Digipymon que poseen habilidades fuera de lo comun y llevan ayudando a la humanidad desde tiempos prehistoricos. " \
+    "Ahora tu debes conquistar la liga de Davanteselia y hacerte maestro Digipymon con ayuda de tus fieles compañeros. " \
+    "Que comience tu aventura")
+    
     print("¿Cómo te llamas, valiente entrenador?")
     nombre_jugador = input("")
     jugador1 = Jugador(nombre_jugador)
