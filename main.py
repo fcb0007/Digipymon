@@ -1,11 +1,30 @@
+"""
+Módulo main, contiene funciones esenciales para la ejecución
+del juego, así como la función main, donde llamaremos a todas 
+ellas para crear el flujo principal del programa
+
+- Generación de Digipymons aleatorios
+- Menú principal del juego
+- Buscar y añadir digipymons a la lista del jugador
+- Combate con otros entrenadores (enemigo)
+- Compra de ítems
+- Uso de ítems
+"""
+import time
+import random
 from digipymon import Digipymon
 from enemigo import Enemigo
 from inventario import Inventario
 from lista_nombres import ListaNombres
 from jugador import Jugador
-import random
 
 def generar_digipymon_aleatorio():
+    """
+    Crea una instancia de la clase Digipymon con valores aleatorios
+
+    Returns:
+        digipymon1 (Digipymon): Objeto de la clase digipymon con valores aleatorios
+    """
     lista_nombres1 = ListaNombres()
     tipos = ["fuego", "agua", "planta"]
     nombre = lista_nombres1.obtener_nombre_digipymon()
@@ -17,9 +36,15 @@ def generar_digipymon_aleatorio():
     return digipymon1
 
 def menu():
+    """
+    Función que imprime en pantalla el menú principal mostrando las distintas opciones
+
+    Returns:
+        respuesta (str): Devuelve un str con la opción del usuario
+    """
     print("")
     print("Elige una opcion")
-    print("1. Buscar Digipymon") 
+    print("1. Buscar Digipymon")
     print("2. Luchar contra un entrenador")
     print("3. Ir a la tienda")
     print("4. Usar objeto")
@@ -29,11 +54,20 @@ def menu():
     respuesta = input("")
     return respuesta
     
-def buscar_digipymon(jugador: Jugador, inventario):
+def buscar_digipymon(jugador: Jugador, inventario: Inventario):
+    """
+    Si el jugador tiene digipyballs y no tiene 6 o más digipymons puede intentar capturar
+    un digipymon generado aleatoriamente
+    
+     Args:
+        jugador (Jugador): El jugador al que asignaremos los digipymons si los captura
+        inventario (Inventario): Inventario del que obtendremos las digipyballs
+     """
+
     digipymon_encontrado = generar_digipymon_aleatorio()
     probabilidad_captura = 100 - (digipymon_encontrado.nivel *10)
     salir_bucle = True
-    while(salir_bucle):
+    while salir_bucle:
         print("Has encontrado un...")
         print(digipymon_encontrado)
         print(f"La probabilidad de captura al {digipymon_encontrado.nombre} es de un {probabilidad_captura}%")
@@ -42,7 +76,7 @@ def buscar_digipymon(jugador: Jugador, inventario):
         print("2. No")
         opcion = input()
         if opcion == "1":
-            if "Digipyball" in inventario.objetos and jugador.cantidad_digipymon < 6:
+            if "Digipyball" in inventario.objetos and jugador.cantidad_digipymon <= 6:
                 inventario.usar_objeto("Digipyball")
 
                 if random.randint(1, 100) <= probabilidad_captura:
@@ -85,9 +119,23 @@ def buscar_digipymon(jugador: Jugador, inventario):
             salir_bucle = False
 
         else:
-            print("Introduce una opción correcta")            
+            print("Introduce una opción correcta")        
 
-def combate(jugador: Jugador):    
+def combate(jugador: Jugador):
+    """
+    Función en la que realiazamos un combate contra un entrenador rival,
+    su funcionamiento en resumen es el siguiente:
+    
+    - Se genera un objeto de ListaNombres del que obtendremos los nombres para el enemigo y sus digipymons
+    - Creamos una instancia de enemigo y le añadimos tantos digipymons generados con atributos aleatorios como digipymons tengamos nosotros
+    - Comparamos el ataque de sus digipymons y los nuestros para dar al ganador de cada combate
+    - Si tienes mas victorias que derrotas ganas tantos digicoins como victorias tengas
+    - Si tienes mas derrotas que victorias pierdes tantos digicoins como derrotas tengas
+    - Si se produce un empate no pierdes ni ganas digicoins
+
+    Args:
+        jugador (Jugador): Jugador que entra en combate
+    """ 
     lista_nombres = ListaNombres()
     enemigo = Enemigo(lista_nombres.obtener_nombre_entrenador())
     bucle_combate = True
@@ -110,23 +158,26 @@ def combate(jugador: Jugador):
                 ataque_enemigo = enemigo.lista_digipymon[i].ataque
                 ataque_jugador = jugador.lista_digipymon[i].ataque
 
-                print("Tu " + digipymon_jugador)
+                print(f"Tu {digipymon_jugador}" )
                 print("Se enfrenta a...")
                 print(digipymon_enemigo)
 
                 if jugador.lista_digipymon[i].vida <= 0:
-                    print(f"Has perdido, tu digipymon {jugador.lista_digipymon[i].nombre}, tiene {jugador.lista_digipymon[i].vida} de vida")
                     derrotas += 1
+                    print(f"Has perdido, tu digipymon {jugador.lista_digipymon[i].nombre}, tiene {jugador.lista_digipymon[i].vida} de vida")
+                    print(f"Victorias: {victorias}, Derrotas: {derrotas}")
+                    time.sleep(3)
+                    print("")
 
                 elif jugador.lista_digipymon[i].ataque > enemigo.lista_digipymon[i].ataque:
                     victorias += 1
                     jugador.lista_digipymon[i].vida = jugador.lista_digipymon[i].vida - ataque_enemigo
                     print(f"Tu {digipymon_jugador} ha vencido")
                     print(f"Ha perdido {ataque_enemigo} puntos de vida")
-                    print(f"Sus puntos de vida restantes son: {jugador.lista_digipymon[i].vida}")
-                    print(f"Llevas {victorias} victorias y {derrotas} derrotas")
-                    bucle_combate = False
-
+                    print(f"Salud restante: {jugador.lista_digipymon[i].vida}")
+                    print(f"Victorias: {victorias}, Derrotas: {derrotas}")
+                    time.sleep(3)
+                    print("")
 
                 elif ataque_enemigo > ataque_jugador:
                     derrotas += 1
@@ -135,7 +186,10 @@ def combate(jugador: Jugador):
                     if jugador.lista_digipymon[i].vida < 0:
                         jugador.lista_digipymon[i].vida = 0
                     print(f"Has perdido el combate, tu digipymon ha perdido {perdida_vida}, puntos de vida")
-                    print(f"Su salud restante es de {jugador.lista_digipymon[i].vida}")
+                    print(f"Salud restante: {jugador.lista_digipymon[i].vida}")
+                    print(f"Victorias: {victorias}, Derrotas: {derrotas}")
+                    time.sleep(3)
+                    print("")
 
                 elif enemigo.lista_digipymon[i].ataque == jugador.lista_digipymon[i].ataque:
                     daño_aleatorio = random.randint(1,5)
@@ -143,26 +197,32 @@ def combate(jugador: Jugador):
                     jugador.lista_digipymon[i].vida -= daño_aleatorio
                     if jugador.lista_digipymon[i].vida < 0:
                         jugador.lista_digipymon[i].vida = 0
-                    print(f"Su salud restante es: {jugador.lista_digipymon[i].vida}")
-
+                    print(f"Salud restante: {jugador.lista_digipymon[i].vida}")
+                    print(f"Victorias: {victorias}, Derrotas: {derrotas}")
+                    time.sleep(3)
+                    print("")
 
             if victorias > derrotas:
                 jugador.digicoins += victorias
                 print(f"Has ganado! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
                 print(f"Ganas {victorias} digicoins, tus digicoins totales son {jugador.digicoins}")
+                time.sleep(3)
                 bucle_combate = False
 
             elif derrotas > victorias:
                 jugador.digicoins -= derrotas
-
+                
                 if jugador.digicoins < 0:
                     jugador.digicoins = 0
+
                 print(f"Has perdido! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
                 print(f"Pierdes {derrotas} digicoins, tus digicoins totales son {jugador.digicoins}")
+                time.sleep(3)
                 bucle_combate = False
 
             elif victorias == derrotas:
                 print(f"Ha habido un empate, Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
+                time.sleep(3)
                 bucle_combate = False
       
         elif opcion == "2":
@@ -171,11 +231,19 @@ def combate(jugador: Jugador):
             if jugador.digicoins < 0:
                 jugador.digicoins = 0
             print("Has huído, se te cae un digicoin al salir corriendo")
-            print(f"Te quedan {jugador.consultar_digicoins()} digicoins")
+            print(f"Te quedan {jugador.consultar_digicoin()} digicoins")
+            time.sleep(3)
             bucle_combate = False
 
 
 def digishop(jugador: Jugador, inventario: Inventario):
+    """
+    Tienda en la que el jugador podrá comprar ítems si tiene suficientes digicoins
+
+    Args:
+        jugador (Jugador): El jugador del que obtenemos las digicoins para comprar ítems
+        inventario (Inventario): Inventario al que añadimos los objetos comprados
+    """
     print("|-----Catalogo de Digishop-----|")
     print(f"Monedero actual: {jugador.digicoins} digicoins")
     print("1. Digipyballs --> 5 digicoins c/u")
@@ -200,11 +268,18 @@ def digishop(jugador: Jugador, inventario: Inventario):
 
     else:
         print("No tienes fondos suficientes o no es la opcion correcta")
-    
+   
     print(f"Te quedan {jugador.digicoins} digicoins")
 
 
 def usar_item(jugador: Jugador, inventario: Inventario):
+    """
+    Función que permite usar objetos del inventario
+
+    Args:
+        jugador (Jugador): Jugador del que obtenemos los digipymons de su lista para aplicarle las mejoras de los objetos
+        inventario (Inventario): Inventario del jugador del que obtenemos los objetos disponibles
+    """
     bucle_item = True
     while bucle_item:
         if jugador.lista_digipymon:
@@ -212,18 +287,16 @@ def usar_item(jugador: Jugador, inventario: Inventario):
                 print("¿Sobre que digipymon quieres utilizar tu objeto?")
                 jugador.consultar_digipymon()
                 seleccion = int(input())
-                jugador.lista_digipymon[seleccion]
 
                 inventario.mostrar_inventario()
-                    
                 print("¿Que objeto quieres usar? (introduce 'salir' para volver al menú)")
                 objeto = input("")
-                
+
                 if objeto.lower() == "digipyball":
                     print("Este objeto no puede ser utilizado en tu digipymon")
 
                 elif objeto.lower() == "pocion":
-                    vida_previa = jugador.lista_digipymon[seleccion].vida                
+                    vida_previa = jugador.lista_digipymon[seleccion].vida
                     jugador.lista_digipymon[seleccion].vida += 5
                     inventario.usar_objeto("Pocion")
                     print(f"Has usado una poción en tu {jugador.lista_digipymon[seleccion].nombre}, su vida ha aumentado de {vida_previa} a {jugador.lista_digipymon[seleccion].vida}")
@@ -246,20 +319,28 @@ def usar_item(jugador: Jugador, inventario: Inventario):
                 bucle_item = False
         else:
             print("No tienes digipymons sobre los que usar tus items")
-            bucle_item = False             
-                                    
-    
+            bucle_item = False
+
 def main():
-    print("Bienvenido al mundo Davanteselia, un mundo lleno de criaturas extraordinarias que ayudan a sus habitantes llamadas " \
-    "Digipymon que poseen habilidades fuera de lo comun y llevan ayudando a la humanidad desde tiempos prehistoricos. " \
-    "Ahora tu debes conquistar la liga de Davanteselia y hacerte maestro Digipymon con ayuda de tus fieles compañeros. " \
-    "Que comience tu aventura")
-    print("¿Cómo te llamas entrenador/a?")
+    """
+    Función que ejecuta el bucle principal del juego, crea una instancia de jugador otra de
+    inventario y va llamando a las difentes funciones del juego según la opción del menú que elijamos
+    """
+    print("¡Bienvenido al mundo de Digipymon!")
+    print("En este mundo habitan criaturas extraordinarias llamadas Digipymons.")
+    print("Algunos los entrenan, otros los coleccionan... pero tú estás a punto de forjar tu propio camino.")
+    print("Hace años, los Digipymons vivían en equilibrio con los humanos, pero últimamente los encuentros salvajes son más frecuentes...")
+    print("Tu misión será descubrir qué está ocurriendo, capturar y entrenar Digipymons, y convertirte en el mejor entrenador del continente.")
+    print()
+    print("¿Cómo te llamas, valiente entrenador?")
     nombre_jugador = input("")
     jugador1 = Jugador(nombre_jugador)
     inventario1 = Inventario()
-    print("Al salir de tu casa el profesor digipyball de tu pueblo Jose Luis te hace obsequio de de 3 Digipyballs, una pocion y de tu primer Digipymon")
+    print(f"\n¡Encantado de conocerte, {nombre_jugador}!")
+    print("Has llegado a Villa Código, un pequeño pueblo donde todos los entrenadores comienzan su aventura.")
+    print("Como obsequio inicial, recibes una poción curativa y tres Digipyballs.")
     inventario1.añadir_objeto("Digipyball", 3)
+    inventario1.añadir_objeto("Pocion", 1)
     
     bucle = True
     while bucle:
@@ -274,15 +355,14 @@ def main():
         elif respuesta == "4":
             usar_item(jugador1, inventario1)
         elif respuesta == "5":
-            inventario1.mostrar_inventario()      
+            inventario1.mostrar_inventario()
         elif respuesta == "6":
             jugador1.consultar_digipymon()
         elif respuesta == "7":
-            print("Nos vemos!")
+            print("Gracias por jugar. ¡Nos vemos en tu próxima aventura por el mundo Digipymon!")
             bucle = False
         else:
             print("Esa opción no es válida")
        
-main()    
-        
-   
+if __name__ == "__main__":
+    main()
