@@ -222,6 +222,13 @@ def combate(jugador: Jugador):
 
 
 def digishop(jugador: Jugador, inventario: Inventario):
+    """
+    Tienda en la que el jugador podrá comprar ítems si tiene suficientes digicoins
+
+    Args:
+        jugador (Jugador): El jugador del que obtenemos las digicoins para comprar ítems
+        inventario (Inventario): Inventario al que añadimos los objetos comprados
+    """
     print("|-----Catalogo de Digishop-----|")
     print(f"Monedero actual: {jugador.digicoins} digicoins")
     print("1. Digipyballs --> 5 digicoins c/u")
@@ -246,11 +253,18 @@ def digishop(jugador: Jugador, inventario: Inventario):
 
     else:
         print("No tienes fondos suficientes o no es la opcion correcta")
-    
+   
     print(f"Te quedan {jugador.digicoins} digicoins")
 
 
 def usar_item(jugador: Jugador, inventario: Inventario):
+    """
+    Función que permite usar objetos del inventario
+
+    Args:
+        jugador (Jugador): Jugador del que obtenemos los digipymons de su lista para aplicarle las mejoras de los objetos
+        inventario (Inventario): Inventario del jugador del que obtenemos los objetos disponibles
+    """
     bucle_item = True
     while bucle_item:
         if jugador.lista_digipymon:
@@ -258,13 +272,11 @@ def usar_item(jugador: Jugador, inventario: Inventario):
                 print("¿Sobre que digipymon quieres utilizar tu objeto?")
                 jugador.consultar_digipymon()
                 seleccion = int(input())
-                jugador.lista_digipymon[seleccion]
 
                 inventario.mostrar_inventario()
-                    
                 print("¿Que objeto quieres usar? (introduce 'salir' para volver al menú)")
                 objeto = input("")
-                
+
                 if objeto.lower() == "digipyball":
                     print("Este objeto no puede ser utilizado en tu digipymon")
 
@@ -295,6 +307,10 @@ def usar_item(jugador: Jugador, inventario: Inventario):
             bucle_item = False
 
 def main():
+    """
+    Función que ejecuta el bucle principal del juego, crea una instancia de jugador otra de
+    inventario y va llamando a las difentes funciones del juego según la opción del menú que elijamos
+    """
     print("Bienvenido a Digipymon!, Aquí empieza tu aventura...")
     print("¿Cómo te llamas?")
     nombre_jugador = input("")
