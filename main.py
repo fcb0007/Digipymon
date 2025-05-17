@@ -332,7 +332,7 @@ def main():
         elif respuesta == "4":
             usar_item(jugador1, inventario1)
         elif respuesta == "5":
-            inventario1.mostrar_inventario()      
+            inventario1.mostrar_inventario()
         elif respuesta == "6":
             jugador1.consultar_digipymon()
         elif respuesta == "7":
