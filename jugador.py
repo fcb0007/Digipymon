@@ -49,7 +49,7 @@ class Jugador:
         if self.lista_digipymon:
             contador = 0
             print("----------------Estos son tus Digipymon-----------------") 
-            for digipymon in self.lista_digipymon:                
+            for digipymon in self.lista_digipymon:
                 print(f"{contador}. {digipymon}")
                 contador += 1
         else:
