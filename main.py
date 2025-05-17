@@ -53,11 +53,20 @@ def menu():
     respuesta = input("")
     return respuesta
     
-def buscar_digipymon(jugador: Jugador, inventario):
+def buscar_digipymon(jugador: Jugador, inventario: Inventario):
+    """
+    Si el jugador tiene digipyballs y no tiene 6 o más digipymons puede intentar capturar
+    un digipymon generado aleatoriamente
+    
+     Args:
+        jugador (Jugador): El jugador al que asignaremos los digipymons si los captura
+        inventario (Inventario): Inventario del que obtendremos las digipyballs
+     """
+
     digipymon_encontrado = generar_digipymon_aleatorio()
     probabilidad_captura = 100 - (digipymon_encontrado.nivel *10)
     salir_bucle = True
-    while(salir_bucle):
+    while salir_bucle:
         print("Has encontrado un...")
         print(digipymon_encontrado)
         print(f"La probabilidad de captura al {digipymon_encontrado.nombre} es de un {probabilidad_captura}%")
@@ -66,7 +75,7 @@ def buscar_digipymon(jugador: Jugador, inventario):
         print("2. No")
         opcion = input()
         if opcion == "1":
-            if "Digipyball" in inventario.objetos and jugador.cantidad_digipymon < 6:
+            if "Digipyball" in inventario.objetos and jugador.cantidad_digipymon <= 6:
                 inventario.usar_objeto("Digipyball")
 
                 if random.randint(1, 100) <= probabilidad_captura:
@@ -109,9 +118,23 @@ def buscar_digipymon(jugador: Jugador, inventario):
             salir_bucle = False
 
         else:
-            print("Introduce una opción correcta")            
+            print("Introduce una opción correcta")        
 
-def combate(jugador: Jugador):    
+def combate(jugador: Jugador):
+    """
+    Función en la que realiazamos un combate contra un entrenador rival,
+    su funcionamiento en resumen es el siguiente:
+    
+    - Se genera un objeto de ListaNombres del que obtendremos los nombres para el enemigo y sus digipymons
+    - Creamos una instancia de enemigo y le añadimos tantos digipymons generados con atributos aleatorios como digipymons tengamos nosotros
+    - Comparamos el ataque de sus digipymons y los nuestros para dar al ganador de cada combate
+    - Si tienes mas victorias que derrotas ganas tantos digicoins como victorias tengas
+    - Si tienes mas derrotas que victorias pierdes tantos digicoins como derrotas tengas
+    - Si se produce un empate no pierdes ni ganas digicoins
+
+    Args:
+        jugador (Jugador): Jugador que entra en combate
+    """ 
     lista_nombres = ListaNombres()
     enemigo = Enemigo(lista_nombres.obtener_nombre_entrenador())
     bucle_combate = True
