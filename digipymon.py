@@ -1,3 +1,6 @@
+"""
+Módulo que contiene la clase digipymon
+"""
 class Digipymon:
     """
     Clase que representa a los digipymon que puede tener un jugador

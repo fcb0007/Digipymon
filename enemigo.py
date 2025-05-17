@@ -1,3 +1,6 @@
+"""
+Módulo que contiene la clase enemigo
+"""
 class Enemigo:
     """
     Clase Enemigo, representa a los entrenadores rivales que también poseen una lista

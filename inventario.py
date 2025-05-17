@@ -1,3 +1,6 @@
+"""
+Módulo que contiene la clase Inventario
+"""
 class Inventario:
     """
     Clase Inventario que almacena los objetos del jugador en un diccionario

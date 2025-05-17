@@ -1,3 +1,6 @@
+"""
+Módulo que contiene la clase ListaNombres
+"""
 import random
 class ListaNombres:
     """

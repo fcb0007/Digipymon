@@ -1,3 +1,6 @@
+"""
+Módulo que contiene la clase jugador
+"""
 class Jugador:
     """
     Clase que representa al personaje del usuario
