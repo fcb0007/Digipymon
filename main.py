@@ -19,7 +19,7 @@ def generar_digipymon_aleatorio():
 def menu():
     print("")
     print("Elige una opcion")
-    print("1. Buscar Digipymon") 
+    print("1. Buscar Digipymon")
     print("2. Luchar contra un entrenador")
     print("3. Ir a la tienda")
     print("4. Usar objeto")
@@ -222,7 +222,7 @@ def usar_item(jugador: Jugador, inventario: Inventario):
                     print("Este objeto no puede ser utilizado en tu digipymon")
 
                 elif objeto.lower() == "pocion":
-                    vida_previa = jugador.lista_digipymon[seleccion].vida                
+                    vida_previa = jugador.lista_digipymon[seleccion].vida
                     jugador.lista_digipymon[seleccion].vida += 5
                     inventario.usar_objeto("Pocion")
                     print(f"Has usado una poción en tu {jugador.lista_digipymon[seleccion].nombre}, su vida ha aumentado de {vida_previa} a {jugador.lista_digipymon[seleccion].vida}")
@@ -245,9 +245,8 @@ def usar_item(jugador: Jugador, inventario: Inventario):
                 bucle_item = False
         else:
             print("No tienes digipymons sobre los que usar tus items")
-            bucle_item = False             
-                                    
-    
+            bucle_item = False
+
 def main():
     print("Bienvenido a Digipymon!, Aquí empieza tu aventura...")
     print("¿Cómo te llamas?")
@@ -279,6 +278,4 @@ def main():
         else:
             print("Esa opción no es válida")
        
-main()    
-        
-   
+main()
