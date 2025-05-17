@@ -19,4 +19,12 @@ class Inventario:
         else:
             print("No dispones de ese objeto")
 
+    def mostrar_inventario(self):
+        if self.objetos:
+            print("--------------Estos son tus ítems------------------")
+            for nombre, cantidad in self.objetos.items():
+                print(f"Item: {nombre}, cantidad: {cantidad} ")
+        else:
+            print("No tienes items que mostrar")     
+
     
