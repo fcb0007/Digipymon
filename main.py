@@ -157,7 +157,8 @@ def usar_item(jugador, inventario):
                               
     
 def main():
-    jugador1 = Jugador("Pepe")
+    print()
+    jugador1 = Jugador()
     inventario1 = Inventario()
 
     bucle = True
