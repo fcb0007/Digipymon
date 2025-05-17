@@ -5,6 +5,8 @@ class ListaNombres:
     a los entrenadores enemigos
     
     Attributes:
+        lista_nombres_digipymons (list): Lista de nombres para los digipymons
+        lista_nombres_entrenadores (list): Lista de nombres para los entrenadores enemigos
 
     """
     def __init__(self):
