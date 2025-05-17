@@ -250,12 +250,15 @@ def usar_item(jugador: Jugador, inventario: Inventario):
                                     
     
 def main():
-    print("Bienvenido a Digipymon!, Aquí empieza tu aventura...")
-    print("¿Cómo te llamas?")
+    print("Bienvenido al mundo Davanteselia, un mundo lleno de criaturas extraordinarias que ayudan a sus habitantes llamadas " \
+    "Digipymon que poseen habilidades fuera de lo comun y llevan ayudando a la humanidad desde tiempos prehistoricos. " \
+    "Ahora tu debes conquistar la liga de Davanteselia y hacerte maestro Digipymon con ayuda de tus fieles compañeros. " \
+    "Que comience tu aventura")
+    print("¿Cómo te llamas entrenador/a?")
     nombre_jugador = input("")
     jugador1 = Jugador(nombre_jugador)
     inventario1 = Inventario()
-    print("Al comenzar en.... recibes una poción y tres digipyballs")
+    print("Al salir de tu casa el profesor digipyball de tu pueblo Jose Luis te hace obsequio de de 3 Digipyballs, una pocion y de tu primer Digipymon")
     inventario1.añadir_objeto("Digipyball", 3)
     
     bucle = True
