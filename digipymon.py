@@ -8,7 +8,7 @@ class Digipymon:
         ataque (int): Puntos de ataque del digipymon
         tipo (): Tipo de digipymon (fuego, agua...)
         nivel (int): Nivel del digipymon
-    """        
+    """     
     def __init__(self, nombre, vida, ataque, tipo, nivel):
         """
         Constructor de la clase digipymon

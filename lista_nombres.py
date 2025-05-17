@@ -1,6 +1,16 @@
 import random
 class ListaNombres:
+    """
+    Clase con listas de nombres que se asignarán a los digipymons generados y
+    a los entrenadores enemigos
+    
+    Attributes:
+
+    """
     def __init__(self):
+        """
+        Constructor de la clase ListasNombres
+        """
         self.lista_nombres_digipymons = ["Printmon", "Bugmon", "Loopmon", "Importmon", "Syntaxmon",
         "Bytepymon", "Arraymon", "Debuggermon", "Stackmon", "Recursimon",
         "Lambdaemon", "Regexmon", "Nopemon", "OOPmon", "Modulemon",
@@ -12,9 +22,21 @@ class ListaNombres:
         "Variable Víctor", "Debug Diego", "Mensaje Manuel", "Cadena Carmen", "Script Samuel"]
 
     def obtener_nombre_digipymon(self):
+        """
+        Método que devueleve devuelve un nombre aleatorio de lista_nombres_digipymons
+
+        Returns:
+            str: Nombre del digipymon
+        """
         nombre_digipymon = random.choice(self.lista_nombres_digipymons)
         return nombre_digipymon
     
     def obtener_nombre_entrenador(self):
+        """
+        Método que devuelve un nombre aleatorio de lista_nombres_entrenador
+
+        Returns:
+            str: Nombre que asignaremos al entrenador enemigo
+        """
         nombre_entrenador = random.choice(self.lista_nombres_entrenadores)
         return nombre_entrenador
