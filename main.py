@@ -364,4 +364,5 @@ def main():
         else:
             print("Esa opción no es válida")
        
-main()
+if __name__ == "__main__":
+    main()
