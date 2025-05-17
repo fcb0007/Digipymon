@@ -158,14 +158,14 @@ def combate(jugador: Jugador):
                 ataque_enemigo = enemigo.lista_digipymon[i].ataque
                 ataque_jugador = jugador.lista_digipymon[i].ataque
 
-                print("Tu " + digipymon_jugador)
+                print(f"Tu {digipymon_jugador}" )
                 print("Se enfrenta a...")
                 print(digipymon_enemigo)
 
                 if jugador.lista_digipymon[i].vida <= 0:
                     derrotas += 1
                     print(f"Has perdido, tu digipymon {jugador.lista_digipymon[i].nombre}, tiene {jugador.lista_digipymon[i].vida} de vida")
-                    print(f"Llevas {victorias} victorias y {derrotas} derrotas")
+                    print(f"Victorias: {victorias}, Derrotas: {derrotas}")
                     time.sleep(3)
                     print("")
 
@@ -174,8 +174,8 @@ def combate(jugador: Jugador):
                     jugador.lista_digipymon[i].vida = jugador.lista_digipymon[i].vida - ataque_enemigo
                     print(f"Tu {digipymon_jugador} ha vencido")
                     print(f"Ha perdido {ataque_enemigo} puntos de vida")
-                    print(f"Sus puntos de vida restantes son: {jugador.lista_digipymon[i].vida}")
-                    print(f"Llevas {victorias} victorias y {derrotas} derrotas")
+                    print(f"Salud restante: {jugador.lista_digipymon[i].vida}")
+                    print(f"Victorias: {victorias}, Derrotas: {derrotas}")
                     time.sleep(3)
                     print("")
 
@@ -186,8 +186,8 @@ def combate(jugador: Jugador):
                     if jugador.lista_digipymon[i].vida < 0:
                         jugador.lista_digipymon[i].vida = 0
                     print(f"Has perdido el combate, tu digipymon ha perdido {perdida_vida}, puntos de vida")
-                    print(f"Su salud restante es de {jugador.lista_digipymon[i].vida}")
-                    print(f"Llevas {victorias} victorias y {derrotas} derrotas")
+                    print(f"Salud restante: {jugador.lista_digipymon[i].vida}")
+                    print(f"Victorias: {victorias}, Derrotas: {derrotas}")
                     time.sleep(3)
                     print("")
 
@@ -197,8 +197,8 @@ def combate(jugador: Jugador):
                     jugador.lista_digipymon[i].vida -= daño_aleatorio
                     if jugador.lista_digipymon[i].vida < 0:
                         jugador.lista_digipymon[i].vida = 0
-                    print(f"Su salud restante es: {jugador.lista_digipymon[i].vida}")
-                    print(f"Llevas {victorias} victorias y {derrotas} derrotas")
+                    print(f"Salud restante: {jugador.lista_digipymon[i].vida}")
+                    print(f"Victorias: {victorias}, Derrotas: {derrotas}")
                     time.sleep(3)
                     print("")
 
@@ -359,7 +359,7 @@ def main():
         elif respuesta == "6":
             jugador1.consultar_digipymon()
         elif respuesta == "7":
-            print("Nos vemos!")
+            print("Gracias por jugar. ¡Nos vemos en tu próxima aventura por el mundo Digipymon!")
             bucle = False
         else:
             print("Esa opción no es válida")
