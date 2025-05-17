@@ -145,7 +145,6 @@ def combate(jugador: Jugador):
                         jugador.lista_digipymon[i].vida = 0
                     print(f"Su salud restante es: {jugador.lista_digipymon[i].vida}")
 
-
             if victorias > derrotas:
                 jugador.digicoins += victorias
                 print(f"Has ganado! Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
