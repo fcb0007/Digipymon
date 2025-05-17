@@ -1,11 +1,29 @@
+"""
+Módulo main, contiene funciones esenciales para la ejecución
+del juego, así como la función main, donde llamaremos a todas 
+ellas para crear el flujo principal del programa
+
+- Generación de Digipymons aleatorios
+- Menú principal del juego
+- Buscar y añadir digipymons a la lista del jugador
+- Combate con otros entrenadores (enemigo)
+- Compra de ítems
+- Uso de ítems
+"""
+import random
 from digipymon import Digipymon
 from enemigo import Enemigo
 from inventario import Inventario
 from lista_nombres import ListaNombres
 from jugador import Jugador
-import random
 
 def generar_digipymon_aleatorio():
+    """
+    Crea una instancia de la clase Digipymon con valores aleatorios
+
+    Returns:
+        digipymon1 (Digipymon): Objeto de la clase digipymon con valores aleatorios
+    """
     lista_nombres1 = ListaNombres()
     tipos = ["fuego", "agua", "planta"]
     nombre = lista_nombres1.obtener_nombre_digipymon()
@@ -17,6 +35,12 @@ def generar_digipymon_aleatorio():
     return digipymon1
 
 def menu():
+    """
+    Función que imprime en pantalla el menú principal mostrando las distintas opciones
+
+    Returns:
+        respuesta (str): Devuelve un str con la opción del usuario
+    """
     print("")
     print("Elige una opcion")
     print("1. Buscar Digipymon")
