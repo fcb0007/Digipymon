@@ -83,7 +83,7 @@ def buscar_digipymon(jugador: Jugador, inventario):
         elif opcion == "2":
             print("Has huido")
             salir_bucle = False
-            
+
         else:
             print("Introduce una opción correcta")            
 
@@ -100,6 +100,7 @@ def combate(jugador: Jugador):
         print("1. Sí")
         print("2. No")
         opcion = input()
+
         if opcion == "1":
             victorias = 0    
             derrotas = 0
@@ -112,6 +113,7 @@ def combate(jugador: Jugador):
                 print("Tu " + digipymon_jugador)
                 print("Se enfrenta a...")
                 print(digipymon_enemigo)
+
                 if jugador.lista_digipymon[i].vida <= 0:
                     print(f"Has perdido, tu digipymon {jugador.lista_digipymon[i].nombre}, tiene {jugador.lista_digipymon[i].vida} de vida")
                     derrotas += 1
@@ -150,7 +152,6 @@ def combate(jugador: Jugador):
                 print(f"Ganas {victorias} digicoins, tus digicoins totales son {jugador.digicoins}")
                 bucle_combate = False
 
-
             elif derrotas > victorias:
                 jugador.digicoins -= derrotas
 
@@ -160,12 +161,10 @@ def combate(jugador: Jugador):
                 print(f"Pierdes {derrotas} digicoins, tus digicoins totales son {jugador.digicoins}")
                 bucle_combate = False
 
-
             elif victorias == derrotas:
                 print(f"Ha habido un empate, Tus victorias han sido: {victorias} y tus derrotas: {derrotas}")
                 bucle_combate = False
-       
-
+      
         elif opcion == "2":
             jugador.digicoins -= 1
 
